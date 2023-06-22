@@ -1,3 +1,4 @@
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
@@ -11,6 +12,12 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ddd;
+  gap: 1rem;
 `;
 
-export { StyledHeader };
+const HeaderTitle = styled(Link)`
+  font-size: 1.8rem;
+  font-weight: 900;
+`;
+
+export { StyledHeader, HeaderTitle };
