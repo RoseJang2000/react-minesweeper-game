@@ -20,4 +20,21 @@ const HeaderTitle = styled(Link)`
   font-weight: 900;
 `;
 
-export { StyledHeader, HeaderTitle };
+const HeaderNav = styled.nav`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+`;
+
+const NavButton = styled(NavLink)`
+  font-size: 1rem;
+
+  &.active {
+    font-weight: 800;
+    text-decoration: underline;
+  }
+`;
+
+export { StyledHeader, HeaderTitle, HeaderNav, NavButton };
