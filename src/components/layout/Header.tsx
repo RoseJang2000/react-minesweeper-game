@@ -1,7 +1,11 @@
-import { StyledHeader } from './HeaderStyle';
+import { HeaderTitle, StyledHeader } from './HeaderStyle';
 
 const Header = () => {
-  return <StyledHeader></StyledHeader>;
+  return (
+    <StyledHeader>
+      <HeaderTitle to="/">💣 MINESWEEPER 💣</HeaderTitle>
+    </StyledHeader>
+  );
 };
 
 export default Header;
