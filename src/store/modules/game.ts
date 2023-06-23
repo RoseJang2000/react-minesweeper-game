@@ -40,6 +40,7 @@ export const gameSlice = createSlice({
       state.rowSize = rowSize;
       state.colSize = colSize;
       state.mines = mines;
+      state.board = boardSetting(rowSize, colSize, mines);
     },
   },
 });
