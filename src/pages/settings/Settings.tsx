@@ -13,7 +13,12 @@ import {
   NORMAL_COL,
   NORMAL_ROW,
 } from 'utils/constants';
-import { SettingsWrapper, StyledButton } from './SettingsStyle';
+import {
+  CustomControllers,
+  CustomResults,
+  SettingsWrapper,
+  StyledButton,
+} from './SettingsStyle';
 
 interface DifficultyDetails {
   easy: Detail;
@@ -55,12 +60,8 @@ const Settings = () => {
     difficultyDetails.easy,
   );
 
-  const handleGameSettings = (
-    rowSize: number,
-    colSize: number,
-    mines: number,
-  ) => {
-    dispatch(gameSetting({ rowSize, colSize, mines }));
+  const handleGameSettings = () => {
+    dispatch(gameSetting({ ...currentSettings }));
   };
 
   const handleChangeDifficulty = (difficulty: string) => {
@@ -110,11 +111,12 @@ const Settings = () => {
         </div>
         {currentDifficulty === 'custom' && (
           <>
-            <ul>
+            <CustomControllers>
               <h2>가로</h2>
               <input
                 type="range"
                 id="rowSize"
+                className="input-range"
                 min={EASY_ROW}
                 max={70}
                 value={currentSettings.rowSize}
@@ -126,6 +128,7 @@ const Settings = () => {
               <input
                 type="range"
                 id="colSize"
+                className="input-range"
                 min={EASY_COL}
                 max={70}
                 value={currentSettings.colSize}
@@ -137,6 +140,7 @@ const Settings = () => {
               <input
                 type="range"
                 id="mines"
+                className="input-range"
                 min={EASY_BOMBS}
                 max={
                   (currentSettings.rowSize - 1) * (currentSettings.colSize - 1)
@@ -146,13 +150,15 @@ const Settings = () => {
                   handleCustomDifficulty(e, 'mines');
                 }}
               />
-            </ul>
-            <div>
-              가로: {currentSettings.rowSize} 세로: {currentSettings.colSize}{' '}
-              지뢰 개수: {currentSettings.mines}
-            </div>
+            </CustomControllers>
+            <CustomResults>
+              <li>가로: {currentSettings.rowSize}</li>
+              <li>세로: {currentSettings.colSize}</li>
+              <li>지뢰 개수: {currentSettings.mines}</li>
+            </CustomResults>
           </>
         )}
+        <StyledButton onClick={handleGameSettings}>SAVE</StyledButton>
       </SettingsWrapper>
     </Layout>
   );

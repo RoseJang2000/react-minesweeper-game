@@ -36,4 +36,21 @@ const StyledButton = styled.button`
   }
 `;
 
-export { SettingsWrapper, StyledButton };
+const CustomControllers = styled.ul`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  .input-range {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+`;
+
+const CustomResults = styled.ul`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+`;
+
+export { SettingsWrapper, StyledButton, CustomControllers, CustomResults };
