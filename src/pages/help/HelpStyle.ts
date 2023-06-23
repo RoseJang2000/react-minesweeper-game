@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 70%;
+  width: 90%;
   margin: auto 0;
   padding: 3rem;
   display: flex;
@@ -18,7 +18,7 @@ const HelpContent = styled.ul`
   gap: 1rem;
 
   .content-title {
-    font-size: 1.7rem;
+    font-size: 1.5rem;
   }
   .content-desc {
     width: 100%;
