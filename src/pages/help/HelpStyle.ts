@@ -17,10 +17,10 @@ const HelpContent = styled.ul`
   flex-direction: column;
   gap: 1rem;
 
-  .help-title {
+  .content-title {
     font-size: 1.7rem;
   }
-  .help-desc {
+  .content-desc {
     width: 100%;
     text-align: left;
     margin: 0 1rem;
