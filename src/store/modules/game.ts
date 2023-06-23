@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { EASY_COL, EASY_ROW, EASY_BOMBS } from 'utils/constants';
+import { boardSetting } from 'utils/gameControl';
 
 export interface GameState {
-  // board: CellState[][];
+  board: CellState[][];
   gameStatus: string;
   rowSize: number;
   colSize: number;
@@ -20,6 +21,7 @@ export interface CellState {
 }
 
 const initialState: GameState = {
+  board: boardSetting(EASY_ROW, EASY_COL, EASY_BOMBS),
   gameStatus: 'ready',
   rowSize: EASY_ROW,
   colSize: EASY_COL,
