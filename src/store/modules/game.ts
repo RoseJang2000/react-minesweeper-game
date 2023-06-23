@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { EASY_COL, EASY_ROW, MIN_BOMBS } from 'utils/constants';
+import { EASY_COL, EASY_ROW, EASY_BOMBS } from 'utils/constants';
 
 export interface GameState {
   // board: CellState[][];
@@ -23,7 +23,7 @@ const initialState: GameState = {
   gameStatus: 'ready',
   rowSize: EASY_ROW,
   colSize: EASY_COL,
-  mines: MIN_BOMBS,
+  mines: EASY_BOMBS,
   flags: 0,
   timer: 0,
   timerStart: false,
