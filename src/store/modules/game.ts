@@ -55,7 +55,8 @@ export const gameSlice = createSlice({
       state.mines = mines;
       state.board = boardSetting(rowSize, colSize, mines);
     },
-    startGame: (state) => {
+    startGame: (state, action) => {
+      const { rowSize, colSize, mines } = action.payload;
       state.rowSize = rowSize;
       state.colSize = colSize;
       state.mines = mines;
@@ -83,7 +84,6 @@ export const gameSlice = createSlice({
       const { x, y } = action.payload;
       const cellData = state.board[y][x];
       console.log(state.board[y][x].flag);
-
       if (cellData.isOpen) {
         return;
       }

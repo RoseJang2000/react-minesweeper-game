@@ -54,11 +54,12 @@ const Settings = () => {
     },
   };
   const savedDifficulty = localStorage.getItem('difficulty');
+  const savedSettings = localStorage.getItem('settings');
   const [currentDifficulty, setCurrentDifficulty] = useState<string>(
     savedDifficulty ? JSON.parse(savedDifficulty) : difficultyArr[0],
   );
   const [currentSettings, setCurrentSettings] = useState<DifficultyDetail>(
-    difficultyDetails.easy,
+    savedSettings ? JSON.parse(savedSettings) : difficultyDetails.easy,
   );
 
   const handleGameSettings = () => {

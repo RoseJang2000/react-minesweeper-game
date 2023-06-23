@@ -13,7 +13,7 @@ export type HandleLeftClick = (
 
 const Board = () => {
   const dispatch = useDispatch();
-  const { gameStatus, rowSize, colSize, board } = useSelector(
+  const { gameStatus, rowSize, colSize, mines, board } = useSelector(
     (state: RootState) => state.game,
   );
   const { startGame, changeCellData, openCell } = gameSlice.actions;
@@ -25,8 +25,9 @@ const Board = () => {
     y: number,
   ) => {
     e.preventDefault();
+    console.log(board[y][x]);
     if (board[y][x].mine && gameStatus === GAME_STATUS.READY) {
-      dispatch(startGame());
+      dispatch(startGame({ rowSize, colSize, mines }));
       dispatch(openCell({ x, y }));
       return;
     }

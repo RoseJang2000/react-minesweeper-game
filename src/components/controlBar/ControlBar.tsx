@@ -9,14 +9,13 @@ import { GAME_STATUS } from 'utils/constants';
 const ControlBar = () => {
   const dispatch = useDispatch();
   const { startGame, increaseTimer } = gameSlice.actions;
-  const { gameStatus, timer, timerStart, mines, flags } = useSelector(
-    (state: RootState) => state.game,
-  );
+  const { rowSize, colSize, mines, gameStatus, timer, timerStart, flags } =
+    useSelector((state: RootState) => state.game);
   const minesLeft = mines - flags;
   const delay = timerStart ? 1000 : null;
 
   const handleGameStart = () => {
-    dispatch(startGame());
+    dispatch(startGame({ rowSize, colSize, mines }));
   };
 
   const handleButtonText = () => {
