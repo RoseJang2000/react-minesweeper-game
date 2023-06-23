@@ -29,7 +29,7 @@ const initialState: GameState = {
   timerStart: false,
 };
 
-export const MinesSlice = createSlice({
+export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
