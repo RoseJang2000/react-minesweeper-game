@@ -1,12 +1,15 @@
 import Board from 'components/board/Board';
 import ControlBar from 'components/controlBar/ControlBar';
 import Layout from 'components/layout/Layout';
+import { Wrapper } from './PlayStyle';
 
 const Play = () => {
   return (
     <Layout>
-      <ControlBar />
-      <Board />
+      <Wrapper>
+        <ControlBar />
+        <Board />
+      </Wrapper>
     </Layout>
   );
 };
