@@ -49,6 +49,18 @@ export const gameSlice = createSlice({
       state.mines = mines;
       state.board = boardSetting(rowSize, colSize, mines);
     },
+    startGame: (state, action) => {
+      const { rowSize, colSize, mines } = action.payload;
+      state.board = boardSetting(rowSize, colSize, mines);
+      state.gameStatus = GAME_STATUS.READY;
+      state.flags = 0;
+      state.openCells = 0;
+      state.timer = 0;
+      state.timerStart = false;
+    },
+    increaseTimer: (state) => {
+      state.timer += 1;
+    },
     changeCellData: (state, action) => {
       const { x, y } = action.payload;
       const currentCell = state.board[y][x];
