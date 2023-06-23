@@ -92,8 +92,6 @@ const Settings = () => {
 
   return (
     <Layout>
-      {currentSettings.rowSize},{currentSettings.colSize},
-      {currentSettings.mines}
       <SettingsWrapper>
         <h1 className="content-title">난이도 설정</h1>
         <div className="content-buttons-wrapper">
