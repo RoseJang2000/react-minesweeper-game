@@ -15,8 +15,18 @@ const Board = () => {
   );
   const sizeArr = Array(rowSize * colSize).fill(null);
 
+  const blockRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
   return (
-    <CellsWrapper rowSize={rowSize} colSize={colSize}>
+    <CellsWrapper
+      rowSize={rowSize}
+      colSize={colSize}
+      onContextMenu={(e) => {
+        blockRightClick(e);
+      }}
+    >
       {sizeArr.map((_, idx) => {
         const x = idx % rowSize; // 열
         const y = Math.floor(idx / rowSize); // 행
