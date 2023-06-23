@@ -27,6 +27,7 @@ export const boardSetting = (
       mine: false,
       flag: false,
       question: false,
+      aroundMines: null,
     };
     const rowArr: CellState[] = Array(rowSize).fill(initialCell);
     result.push(rowArr);
@@ -62,4 +63,106 @@ export const getChangedCellData = (currentData: CellState) => {
     flagCount += 1;
   }
   return { newCellData, flagCount };
+};
+
+interface AroundCellIdx {
+  x: number;
+  y: number;
+}
+
+// 셀 클릭(열기) 이벤트 함수
+export const openCellhandler = (board: CellState[][], x: number, y: number) => {
+  // 셀 주변 8개의 셀 안에 있는 지뢰의 개수를 탐색해 구하는 함수
+  const getBombCount = (x: number, y: number) => {
+    const aroundCells: CellState[] = [];
+    console.log(board, board[y][x]);
+    if (y > 0) {
+      // 첫번째 행이 아니라면 윗 행의 셀 3개 배열에 추가
+      aroundCells.push(
+        board[y - 1][x - 1],
+        board[y - 1][x],
+        board[y - 1][x + 1],
+      );
+    }
+    //  양 옆 셀 배열에 추가
+    aroundCells.push(board[y][x - 1], board[y][x + 1]);
+    if (y < board.length - 1) {
+      // 마지막 행이 아니라면 아랫 행의 셀 3개 배열에 추가
+      aroundCells.push(
+        board[y + 1][x - 1],
+        board[y + 1][x],
+        board[y + 1][x + 1],
+      );
+    }
+
+    // 배열의 요소 중 지뢰를 가진 요소의 개수
+    console.log(aroundCells);
+    const bombCount = aroundCells
+      .filter((item) => item)
+      .filter((item) => item.mine).length;
+
+    console.log(bombCount);
+    return bombCount;
+  };
+
+  let openCells = 0;
+
+  const openAroundCells = (x: number, y: number) => {
+    const cellData = board[y][x] ? board[y][x] : undefined;
+    if (cellData === undefined) {
+      return;
+    }
+
+    // 셀이 아무 옵션도 없는 셀인지 검사
+    const isEmptyCell =
+      board[y][x].aroundMines === null &&
+      !board[y][x].mine &&
+      !board[y][x].flag &&
+      !board[y][x].question;
+
+    // 비어있는 셀이 아니라면 탐색 끝냄
+    if (!isEmptyCell) {
+      console.log('out');
+      return;
+    }
+
+    board[y][x] = {
+      ...cellData,
+      isOpen: true,
+      aroundMines: getBombCount(x, y),
+    };
+    openCells += 1;
+
+    const aroundCells: AroundCellIdx[] = [];
+
+    if (y > 0) {
+      // 첫번째 행이 아니라면 윗 행의 셀 3개 좌표 배열에 추가
+      aroundCells.push(
+        { y: y - 1, x: x - 1 },
+        { y: y - 1, x },
+        { y: y - 1, x: x + 1 },
+      );
+    }
+    //  양 옆 좌표 셀 배열에 추가
+    aroundCells.push({ y, x: x - 1 }, { y, x: x + 1 });
+    if (y < board.length - 1) {
+      // 마지막 행이 아니라면 아랫 행의 셀 3개 좌표 배열에 추가
+      aroundCells.push(
+        { y: y + 1, x: x - 1 },
+        { y: y + 1, x },
+        { y: y + 1, x: x + 1 },
+      );
+    }
+
+    // 지금 연 셀 주변에 지뢰가 없다면 주변 셀을 더 탐색
+    if (board[y][x].aroundMines === 0) {
+      for (const aroundCell of aroundCells) {
+        openAroundCells(aroundCell.x, aroundCell.y);
+      }
+    }
+  };
+
+  openAroundCells(x, y);
+
+  return { board, openCells };
 };
