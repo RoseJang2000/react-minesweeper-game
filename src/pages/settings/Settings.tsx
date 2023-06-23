@@ -15,8 +15,13 @@ import {
 } from 'utils/constants';
 import { SettingsWrapper, StyledButton } from './SettingsStyle';
 
-interface DifficultyOptions {
-  type: string;
+interface DifficultyDetails {
+  easy: Detail;
+  normal: Detail;
+  hard: Detail;
+}
+
+interface Detail {
   rowSize: number;
   colSize: number;
   mines: number;
@@ -25,28 +30,26 @@ interface DifficultyOptions {
 const Settings = () => {
   const dispatch = useDispatch();
   const { gameSetting } = gameSlice.actions;
-  const difficulty: DifficultyOptions[] = [
-    {
-      type: 'easy',
+  const difficultyArr: string[] = ['easy', 'normal', 'hard', 'custom'];
+  const difficultyDetails: DifficultyDetails = {
+    easy: {
       rowSize: EASY_ROW,
       colSize: EASY_COL,
       mines: EASY_BOMBS,
     },
-    {
-      type: 'normal',
+    normal: {
       rowSize: NORMAL_ROW,
       colSize: NORMAL_COL,
       mines: NORMAL_BOMBS,
     },
-    {
-      type: 'hard',
+    hard: {
       rowSize: HARD_ROW,
       colSize: HARD_COL,
       mines: HARD_BOMBS,
     },
-  ];
+  };
   const [currentDifficulty, setCurrentDifficulty] = useState<string>(
-    difficulty[0].type,
+    difficultyArr[0],
   );
 
   const handleGameSettings = (
@@ -57,10 +60,13 @@ const Settings = () => {
     dispatch(gameSetting({ rowSize, colSize, mines }));
   };
 
-  const handleChangeDifficulty = (selectedOption: DifficultyOptions) => {
-    const { type, rowSize, colSize, mines } = selectedOption;
-    setCurrentDifficulty(type);
-    handleGameSettings(rowSize, colSize, mines);
+  const handleChangeDifficulty = (difficulty: string) => {
+    setCurrentDifficulty(difficulty);
+    if (difficulty !== 'custom') {
+      const { rowSize, colSize, mines } =
+        difficultyDetails[difficulty as keyof object];
+      handleGameSettings(rowSize, colSize, mines);
+    }
   };
 
   return (
@@ -68,15 +74,15 @@ const Settings = () => {
       <SettingsWrapper>
         <h1 className="content-title">난이도 설정</h1>
         <div className="content-buttons-wrapper">
-          {difficulty.map((item) => (
+          {difficultyArr.map((item) => (
             <StyledButton
-              key={item.type}
-              className={currentDifficulty === item.type ? 'btn-selected' : ''}
+              key={item}
+              className={currentDifficulty === item ? 'btn-selected' : ''}
               onClick={() => {
                 handleChangeDifficulty(item);
               }}
             >
-              {item.type}
+              {item}
             </StyledButton>
           ))}
         </div>
