@@ -13,7 +13,7 @@ import {
   NORMAL_COL,
   NORMAL_ROW,
 } from 'utils/constants';
-import { SettingsWrapper } from './SettingsStyle';
+import { SettingsWrapper, StyledButton } from './SettingsStyle';
 
 interface DifficultyOptions {
   type: string;
@@ -67,17 +67,19 @@ const Settings = () => {
     <Layout>
       <SettingsWrapper>
         <h1 className="content-title">난이도 설정</h1>
-        {difficulty.map((item) => (
-          <button
-            key={item.type}
-            className={currentDifficulty === item.type ? 'active' : ''}
-            onClick={() => {
-              handleChangeDifficulty(item);
-            }}
-          >
-            {item.type}
-          </button>
-        ))}
+        <div className="content-buttons-wrapper">
+          {difficulty.map((item) => (
+            <StyledButton
+              key={item.type}
+              className={currentDifficulty === item.type ? 'btn-selected' : ''}
+              onClick={() => {
+                handleChangeDifficulty(item);
+              }}
+            >
+              {item.type}
+            </StyledButton>
+          ))}
+        </div>
       </SettingsWrapper>
     </Layout>
   );
