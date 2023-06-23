@@ -51,6 +51,9 @@ const Settings = () => {
   const [currentDifficulty, setCurrentDifficulty] = useState<string>(
     difficultyArr[0],
   );
+  const [currentSettings, setCurrentSettings] = useState<Detail>(
+    difficultyDetails.easy,
+  );
 
   const handleGameSettings = (
     rowSize: number,
@@ -63,14 +66,33 @@ const Settings = () => {
   const handleChangeDifficulty = (difficulty: string) => {
     setCurrentDifficulty(difficulty);
     if (difficulty !== 'custom') {
-      const { rowSize, colSize, mines } =
-        difficultyDetails[difficulty as keyof object];
-      handleGameSettings(rowSize, colSize, mines);
+      const selectedSetting = difficultyDetails[difficulty as keyof object];
+      setCurrentSettings(selectedSetting);
+    }
+  };
+
+  const handleCustomDifficulty = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    type: string,
+  ) => {
+    const { value } = e.target;
+
+    switch (type) {
+      case 'rowSize':
+        setCurrentSettings((cur) => ({ ...cur, rowSize: Number(value) }));
+        break;
+      case 'colSize':
+        setCurrentSettings((cur) => ({ ...cur, colSize: Number(value) }));
+        break;
+      case 'mines':
+        setCurrentSettings((cur) => ({ ...cur, mines: Number(value) }));
     }
   };
 
   return (
     <Layout>
+      {currentSettings.rowSize},{currentSettings.colSize},
+      {currentSettings.mines}
       <SettingsWrapper>
         <h1 className="content-title">난이도 설정</h1>
         <div className="content-buttons-wrapper">
@@ -86,6 +108,51 @@ const Settings = () => {
             </StyledButton>
           ))}
         </div>
+        {currentDifficulty === 'custom' && (
+          <>
+            <ul>
+              <h2>가로</h2>
+              <input
+                type="range"
+                id="rowSize"
+                min={EASY_ROW}
+                max={70}
+                value={currentSettings.rowSize}
+                onChange={(e) => {
+                  handleCustomDifficulty(e, 'rowSize');
+                }}
+              />
+              <h2>세로</h2>
+              <input
+                type="range"
+                id="colSize"
+                min={EASY_COL}
+                max={70}
+                value={currentSettings.colSize}
+                onChange={(e) => {
+                  handleCustomDifficulty(e, 'colSize');
+                }}
+              />
+              <h2>지뢰 개수</h2>
+              <input
+                type="range"
+                id="mines"
+                min={EASY_BOMBS}
+                max={
+                  (currentSettings.rowSize - 1) * (currentSettings.colSize - 1)
+                }
+                value={currentSettings.mines}
+                onChange={(e) => {
+                  handleCustomDifficulty(e, 'mines');
+                }}
+              />
+            </ul>
+            <div>
+              가로: {currentSettings.rowSize} 세로: {currentSettings.colSize}{' '}
+              지뢰 개수: {currentSettings.mines}
+            </div>
+          </>
+        )}
       </SettingsWrapper>
     </Layout>
   );
