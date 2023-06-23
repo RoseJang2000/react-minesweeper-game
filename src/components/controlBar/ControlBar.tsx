@@ -4,6 +4,7 @@ import { RootState } from 'store';
 import { gameSlice } from 'store/modules/game';
 import { useEffect } from 'react';
 import { useInterval } from 'hooks/useInterval';
+import { GAME_STATUS } from 'utils/constants';
 
 const ControlBar = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,13 @@ const ControlBar = () => {
     dispatch(startGame());
   };
 
+  const handleButtonText = () => {
+    if (gameStatus === GAME_STATUS.READY) return '😶';
+    if (gameStatus === GAME_STATUS.RUN) return '😆';
+    if (gameStatus === GAME_STATUS.LOSE) return '😭';
+    return '🥳';
+  };
+
   // 게임이 시작되면 1초마다 타이머 증가시키는 액션 호출
   useInterval(() => {
     dispatch(increaseTimer());
@@ -26,7 +34,7 @@ const ControlBar = () => {
   return (
     <Wrapper>
       <StyledNumber>💣 {String(minesLeft).padStart(4, '0')}</StyledNumber>
-      <PlayButton onClick={handleGameStart}>😀</PlayButton>
+      <PlayButton onClick={handleGameStart}>{handleButtonText()}</PlayButton>
       <StyledNumber>🕒 {String(timer).padStart(4, '0')}</StyledNumber>
     </Wrapper>
   );
