@@ -4,6 +4,7 @@ import { CELL_SIZE } from 'utils/constants';
 const CellsWrapper = styled.div<{ rowSize: number; colSize: number }>`
   width: fit-content;
   max-width: 100%;
+  max-height: calc(100% - 4rem);
   margin: auto;
   display: grid;
   grid-template-columns: repeat(${(props) => props.rowSize}, ${CELL_SIZE}rem);
