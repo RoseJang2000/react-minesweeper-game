@@ -49,9 +49,11 @@ export const gameSlice = createSlice({
       state.mines = mines;
       state.board = boardSetting(rowSize, colSize, mines);
     },
-    startGame: (state, action) => {
-      const { rowSize, colSize, mines } = action.payload;
-      state.board = boardSetting(rowSize, colSize, mines);
+    startGame: (state) => {
+      state.rowSize = EASY_ROW;
+      state.colSize = EASY_COL;
+      state.mines = EASY_BOMBS;
+      state.board = boardSetting(state.rowSize, state.colSize, state.mines);
       state.gameStatus = GAME_STATUS.READY;
       state.flags = 0;
       state.openCells = 0;
