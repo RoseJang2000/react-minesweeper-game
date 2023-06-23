@@ -1,4 +1,3 @@
-import { HandleLeftClick } from 'components/board/Board';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { CellState, gameSlice } from 'store/modules/game';

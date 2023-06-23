@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PlayButton, StyledNumber, Wrapper } from './ControlBarStyle';
 import { RootState } from 'store';
 import { gameSlice } from 'store/modules/game';
-import { useEffect } from 'react';
 import { useInterval } from 'hooks/useInterval';
 import { GAME_STATUS } from 'utils/constants';
 
