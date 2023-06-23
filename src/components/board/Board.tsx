@@ -15,7 +15,7 @@ const Board = () => {
       {sizeArr.map((_, idx) => {
         const x = idx % rowSize; // 열
         const y = Math.floor(idx / colSize); // 행
-        return <Cell key={idx} />;
+        return <Cell key={idx} x={x} y={y} cellData={board[y][x]} />;
       })}
     </CellsWrapper>
   );
