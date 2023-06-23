@@ -1,10 +1,12 @@
-import GameBoard from 'components/GameBoard/GameBoard';
+import Board from 'components/board/Board';
+import ControlBar from 'components/controlBar/ControlBar';
 import Layout from 'components/layout/Layout';
 
 const Play = () => {
   return (
     <Layout>
-      <GameBoard />
+      <ControlBar />
+      <Board />
     </Layout>
   );
 };
