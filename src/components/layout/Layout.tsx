@@ -1,5 +1,5 @@
 import Header from './Header';
-import { Wrapper } from './LayoutStyle';
+import { StyledMain, Wrapper } from './LayoutStyle';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <Wrapper>
       <Header />
-      <main>{children}</main>
+      <StyledMain>{children}</StyledMain>
     </Wrapper>
   );
 };

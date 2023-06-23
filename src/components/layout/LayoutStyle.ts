@@ -7,4 +7,13 @@ const Wrapper = styled.div`
   background-color: #fefefe;
 `;
 
-export { Wrapper };
+const StyledMain = styled.main`
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export { Wrapper, StyledMain };
