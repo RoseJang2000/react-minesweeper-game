@@ -4,7 +4,6 @@ import { CellsWrapper } from './BoardStyle';
 import { RootState } from 'store';
 
 const Board = () => {
-  const dispatch = useDispatch();
   const { rowSize, colSize, board } = useSelector(
     (state: RootState) => state.game,
   );
@@ -14,7 +13,7 @@ const Board = () => {
     <CellsWrapper rowSize={rowSize} colSize={colSize}>
       {sizeArr.map((_, idx) => {
         const x = idx % rowSize; // 열
-        const y = Math.floor(idx / colSize); // 행
+        const y = Math.floor(idx / rowSize); // 행
         return <Cell key={idx} x={x} y={y} cellData={board[y][x]} />;
       })}
     </CellsWrapper>
