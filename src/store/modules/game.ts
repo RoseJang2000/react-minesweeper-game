@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { DifficultyDetail } from 'pages/settings/Settings';
 import { EASY_COL, EASY_ROW, EASY_BOMBS, GAME_STATUS } from 'utils/constants';
 import {
   boardSetting,
@@ -29,8 +28,8 @@ export interface CellState {
 
 const savedSettings = localStorage.getItem('settings');
 const rowSize = savedSettings ? JSON.parse(savedSettings).rowSize : EASY_ROW;
-const colSize = savedSettings ? JSON.parse(savedSettings).colSize : EASY_ROW;
-const mines = savedSettings ? JSON.parse(savedSettings).mines : EASY_ROW;
+const colSize = savedSettings ? JSON.parse(savedSettings).colSize : EASY_COL;
+const mines = savedSettings ? JSON.parse(savedSettings).mines : EASY_BOMBS;
 
 const initialState: GameState = {
   board: boardSetting(rowSize, colSize, mines),
@@ -83,36 +82,55 @@ export const gameSlice = createSlice({
     openCell: (state, action) => {
       const { x, y } = action.payload;
       const cellData = state.board[y][x];
-      console.log(state.board[y][x].flag);
-      if (cellData.isOpen) {
+
+      if (
+        cellData.isOpen ||
+        state.gameStatus === GAME_STATUS.LOSE ||
+        state.gameStatus === GAME_STATUS.WIN
+      ) {
         return;
       }
 
       // 첫 셀을 여는 경우 게임 시작, 타이머 작동
       if (state.gameStatus === GAME_STATUS.READY) {
+        if (cellData.mine) {
+          let checkedBoard: CellState[][] = state.board.slice();
+
+          while (checkedBoard[y][x].mine) {
+            checkedBoard = boardSetting(
+              state.rowSize,
+              state.colSize,
+              state.mines,
+            );
+          }
+          state.board = checkedBoard;
+          const { board, openCells } = openCellhandler(state.board, x, y);
+          state.board = board;
+          state.openCells += openCells;
+        }
         state.gameStatus = GAME_STATUS.RUN;
         state.timerStart = true;
+      } else {
+        // 선택한 셀이 지뢰인 경우 게임 종료
+        if (cellData.mine) {
+          state.gameStatus = GAME_STATUS.LOSE;
+          state.timerStart = false;
+          state.timer = 0;
+          return;
+        }
+
+        const { board, openCells } = openCellhandler(state.board, x, y);
+        state.board = board;
+        state.openCells += openCells;
+
+        // 지뢰를 제외한 모든 셀을 연 경우 게임 승리
+        if (state.rowSize * state.colSize - state.mines === state.openCells) {
+          console.log('win!!!!!!');
+          state.gameStatus = GAME_STATUS.WIN;
+          state.timerStart = false;
+          state.timer = 0;
+        }
       }
-
-      // 선택한 셀이 지뢰인 경우 게임 종료
-      if (cellData.mine) {
-        state.gameStatus = GAME_STATUS.LOSE;
-        state.timerStart = false;
-        return;
-      }
-
-      const { board, openCells } = openCellhandler(state.board, x, y);
-      console.log(board);
-      state.board = board;
-      state.openCells = openCells;
-
-      // 지뢰를 제외한 모든 셀을 연 경우 게임 승리
-      if (state.rowSize * state.colSize - state.mines === openCells) {
-        state.gameStatus = GAME_STATUS.WIN;
-        state.timerStart = false;
-      }
-
-      console.log(state.gameStatus);
     },
   },
 });

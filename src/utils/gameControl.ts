@@ -122,7 +122,6 @@ export const openCellhandler = (board: CellState[][], x: number, y: number) => {
 
     // 비어있는 셀이 아니라면 탐색 끝냄
     if (!isEmptyCell) {
-      console.log('out');
       return;
     }
 

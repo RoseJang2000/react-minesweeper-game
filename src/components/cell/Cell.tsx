@@ -9,17 +9,25 @@ interface CellProps {
   x: number;
   y: number;
   cellData: CellState;
-  handleLeftClick: HandleLeftClick;
 }
 
-const Cell = ({ x, y, cellData, handleLeftClick }: CellProps) => {
+const Cell = ({ x, y, cellData }: CellProps) => {
   const dispatch = useDispatch();
-  const { changeCellData } = gameSlice.actions;
+  const { changeCellData, openCell } = gameSlice.actions;
   const { gameStatus } = useSelector((state: RootState) => state.game);
 
   const handleRightClick = (e: React.MouseEvent<HTMLDivElement>) => {
     e.preventDefault();
     dispatch(changeCellData({ x, y }));
+  };
+
+  const handleLeftClick = (
+    e: React.MouseEvent<HTMLDivElement>,
+    x: number,
+    y: number,
+  ) => {
+    e.preventDefault();
+    dispatch(openCell({ x, y }));
   };
 
   const handleCellText = () => {
