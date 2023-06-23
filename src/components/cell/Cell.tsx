@@ -35,7 +35,6 @@ const Cell = ({ x, y, cellData }: CellProps) => {
       return cellData.aroundMines === 0 ? '' : cellData.aroundMines;
     if (gameStatus === GAME_STATUS.WIN && cellData.mine) return '💣';
     if (gameStatus === GAME_STATUS.LOSE && cellData.mine) return '💥';
-    if (cellData.mine) return 'X';
     if (cellData.question) return '?';
     if (cellData.flag) return '🚩';
     return;

@@ -1,4 +1,4 @@
-export const CELL_SIZE = 1;
+export const CELL_SIZE = 1.3;
 
 export const EASY_ROW = 8;
 export const EASY_COL = 8;
