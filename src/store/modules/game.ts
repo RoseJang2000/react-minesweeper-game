@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { DifficultyDetail } from 'pages/settings/Settings';
 import { EASY_COL, EASY_ROW, EASY_BOMBS, GAME_STATUS } from 'utils/constants';
 import {
   boardSetting,
@@ -26,12 +27,17 @@ export interface CellState {
   aroundMines: number | null;
 }
 
+const savedSettings = localStorage.getItem('settings');
+const rowSize = savedSettings ? JSON.parse(savedSettings).rowSize : EASY_ROW;
+const colSize = savedSettings ? JSON.parse(savedSettings).colSize : EASY_ROW;
+const mines = savedSettings ? JSON.parse(savedSettings).mines : EASY_ROW;
+
 const initialState: GameState = {
-  board: boardSetting(EASY_ROW, EASY_COL, EASY_BOMBS),
+  board: boardSetting(rowSize, colSize, mines),
   gameStatus: 'ready',
-  rowSize: EASY_ROW,
-  colSize: EASY_COL,
-  mines: EASY_BOMBS,
+  rowSize,
+  colSize,
+  mines,
   flags: 0,
   openCells: 0,
   timer: 0,
@@ -50,9 +56,9 @@ export const gameSlice = createSlice({
       state.board = boardSetting(rowSize, colSize, mines);
     },
     startGame: (state) => {
-      state.rowSize = EASY_ROW;
-      state.colSize = EASY_COL;
-      state.mines = EASY_BOMBS;
+      state.rowSize = rowSize;
+      state.colSize = colSize;
+      state.mines = mines;
       state.board = boardSetting(state.rowSize, state.colSize, state.mines);
       state.gameStatus = GAME_STATUS.READY;
       state.flags = 0;

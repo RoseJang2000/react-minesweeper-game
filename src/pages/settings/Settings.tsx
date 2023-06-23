@@ -21,12 +21,12 @@ import {
 } from './SettingsStyle';
 
 interface DifficultyDetails {
-  easy: Detail;
-  normal: Detail;
-  hard: Detail;
+  easy: DifficultyDetail;
+  normal: DifficultyDetail;
+  hard: DifficultyDetail;
 }
 
-interface Detail {
+export interface DifficultyDetail {
   rowSize: number;
   colSize: number;
   mines: number;
@@ -53,15 +53,18 @@ const Settings = () => {
       mines: HARD_BOMBS,
     },
   };
+  const savedDifficulty = localStorage.getItem('difficulty');
   const [currentDifficulty, setCurrentDifficulty] = useState<string>(
-    difficultyArr[0],
+    savedDifficulty ? JSON.parse(savedDifficulty) : difficultyArr[0],
   );
-  const [currentSettings, setCurrentSettings] = useState<Detail>(
+  const [currentSettings, setCurrentSettings] = useState<DifficultyDetail>(
     difficultyDetails.easy,
   );
 
   const handleGameSettings = () => {
     dispatch(gameSetting({ ...currentSettings }));
+    localStorage.setItem('settings', JSON.stringify(currentSettings));
+    localStorage.setItem('difficulty', JSON.stringify(currentDifficulty));
   };
 
   const handleChangeDifficulty = (difficulty: string) => {
