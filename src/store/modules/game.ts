@@ -32,5 +32,12 @@ const initialState: GameState = {
 export const MinesSlice = createSlice({
   name: 'game',
   initialState,
-  reducers: {},
+  reducers: {
+    gameSetting: (state, action) => {
+      const { rowSize, colSize, mines } = action.payload;
+      state.rowSize = rowSize;
+      state.colSize = colSize;
+      state.mines = mines;
+    },
+  },
 });
