@@ -1,4 +1,3 @@
-import Board from 'components/board/Board';
 import { CellState } from 'store/modules/game';
 
 export const boardSetting = (
@@ -41,4 +40,26 @@ export const boardSetting = (
   }
 
   return result;
+};
+
+// 셀 마우스 우클릭 시 셀 변경할 셀 관련 데이터를 리턴하는 함수
+export const getChangedCellData = (currentData: CellState) => {
+  const { flag, question } = currentData;
+  const newCellData = { ...currentData };
+  let flagCount = 0; // 셀 데이터 변경과 관련한 깃발 개수 증감 정보를 저장할 변수
+
+  if (flag) {
+    // 셀이 깃발 표시 상태인 경우 물음표 상태로 변경, 깃발 개수 -1
+    newCellData.flag = false;
+    newCellData.question = true;
+    flagCount -= 1;
+  } else if (question) {
+    // 셀이 물음표 상태인 경우 일반 상태로 변경
+    newCellData.question = false;
+  } else {
+    // 셀이 일반 상태인 경우 깃발 상태로 변경, 깃발 개수 +1
+    newCellData.flag = true;
+    flagCount += 1;
+  }
+  return { newCellData, flagCount };
 };

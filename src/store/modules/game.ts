@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { EASY_COL, EASY_ROW, EASY_BOMBS } from 'utils/constants';
-import { boardSetting } from 'utils/gameControl';
+import { boardSetting, getChangedCellData } from 'utils/gameControl';
 
 export interface GameState {
   board: CellState[][];
@@ -41,6 +41,16 @@ export const gameSlice = createSlice({
       state.colSize = colSize;
       state.mines = mines;
       state.board = boardSetting(rowSize, colSize, mines);
+    },
+    changeCellData: (state, action) => {
+      const { x, y } = action.payload;
+      const currentCell = state.board[y][x];
+
+      if (!currentCell.isOpen) {
+        const { newCellData, flagCount } = getChangedCellData(currentCell);
+        state.board[y][x] = { ...newCellData };
+        state.flags += flagCount;
+      }
     },
   },
 });
