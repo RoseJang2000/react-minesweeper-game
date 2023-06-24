@@ -81,16 +81,23 @@ const Settings = () => {
     type: string,
   ) => {
     const { value } = e.target;
+    let maxSize = 99999;
 
     switch (type) {
       case 'rowSize':
         setCurrentSettings((cur) => ({ ...cur, rowSize: Number(value) }));
+        maxSize = (currentSettings.colSize - 1) * (Number(value) - 1);
         break;
       case 'colSize':
         setCurrentSettings((cur) => ({ ...cur, colSize: Number(value) }));
+        maxSize = (currentSettings.rowSize - 1) * (Number(value) - 1);
         break;
       case 'mines':
         setCurrentSettings((cur) => ({ ...cur, mines: Number(value) }));
+    }
+
+    if (maxSize < currentSettings.mines) {
+      setCurrentSettings((cur) => ({ ...cur, mines: maxSize }));
     }
   };
 
