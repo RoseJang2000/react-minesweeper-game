@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 70%;
+  width: 90%;
   margin: auto 0;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,10 +17,10 @@ const HelpContent = styled.ul`
   flex-direction: column;
   gap: 1rem;
 
-  .help-title {
-    font-size: 1.7rem;
+  .content-title {
+    font-size: 1.5rem;
   }
-  .help-desc {
+  .content-desc {
     width: 100%;
     text-align: left;
     margin: 0 1rem;

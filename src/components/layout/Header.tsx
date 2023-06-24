@@ -6,6 +6,7 @@ const Header = () => {
       <HeaderTitle to="/">💣 MINESWEEPER 💣</HeaderTitle>
       <HeaderNav>
         <NavButton to="/">PLAY</NavButton>
+        <NavButton to="/settings">SETTINGS</NavButton>
         <NavButton to="/help">HELP</NavButton>
       </HeaderNav>
     </StyledHeader>
