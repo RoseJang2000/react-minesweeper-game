@@ -125,7 +125,6 @@ export const gameSlice = createSlice({
 
         // 지뢰를 제외한 모든 셀을 연 경우 게임 승리
         if (state.rowSize * state.colSize - state.mines === state.openCells) {
-          console.log('win!!!!!!');
           state.gameStatus = GAME_STATUS.WIN;
           state.timerStart = false;
           state.timer = 0;

@@ -75,7 +75,7 @@ export const openCellhandler = (board: CellState[][], x: number, y: number) => {
   // 셀 주변 8개의 셀 안에 있는 지뢰의 개수를 탐색해 구하는 함수
   const getBombCount = (x: number, y: number) => {
     const aroundCells: CellState[] = [];
-    console.log(board, board[y][x]);
+
     if (y > 0) {
       // 첫번째 행이 아니라면 윗 행의 셀 3개 배열에 추가
       aroundCells.push(
@@ -96,12 +96,10 @@ export const openCellhandler = (board: CellState[][], x: number, y: number) => {
     }
 
     // 배열의 요소 중 지뢰를 가진 요소의 개수
-    console.log(aroundCells);
     const bombCount = aroundCells
       .filter((item) => item)
       .filter((item) => item.mine).length;
 
-    console.log(bombCount);
     return bombCount;
   };
 
