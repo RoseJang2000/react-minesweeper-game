@@ -10,6 +10,7 @@ const SettingsWrapper = styled(Wrapper)`
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 2rem;
   }
 `;
@@ -20,6 +21,7 @@ const StyledButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   background-color: #fff;
   border: none;
   border-radius: 0.5rem;
@@ -50,6 +52,7 @@ const CustomResults = styled.ul`
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 2rem;
 `;
 

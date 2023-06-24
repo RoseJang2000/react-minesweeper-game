@@ -12,6 +12,8 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  z-index: 10;
   gap: 1rem;
 `;
 
