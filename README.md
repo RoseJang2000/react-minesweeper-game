@@ -1,6 +1,6 @@
 # 💣 React 지뢰찾기 게임
 
-![스크린샷 2023-06-26 오전 1 21 53](https://github.com/RoseJang2000/react-minesweeper-game/assets/115916008/8e882c3a-1deb-47c2-8c6d-ce0e5a1cdbff)
+![](https://github.com/RoseJang2000/react-minesweeper-game/assets/115916008/6405dd59-adff-4ba2-974e-4dfe7b5bd223)
 
 
 ## 프로젝트 실행, 배포 링크
@@ -78,16 +78,15 @@ npm run start
 
 ## Code Convention
 
-| 타입 | Emoji | Code | 설명 |
-| --- | --- | --- | --- |
-| feat | ✨ | : sparkles : | 새로운 기능 추가 |
-| fix | 🐛 | : bug : | 버그 수정 |
-| docs | 📝 | : memo : | 문서 수정 |
-| refactor | ♻️ | : recycle : | 코드 리팩터링 |
-| chore | 📦 | : package : | 빌드 업무 수정, 패키지 매니저 수정(프로덕션 코드 변경 X) |
-| design | 💄 | : lipstick : | CSS 등 사용자 UI 디자인 변경 / 이미지 파일 업로드 |
-| comment | 💡 | : bulb : | 필요한 주석 추가 및 변경 |
-| rename | 🚚 | : truck : | 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우 |
-| remove | 🔥 | : fire : | 파일을 삭제하는 작업만 수행한 경우 |
-| other | 🤡 | : clown_face : |  커밋 타입 중 해당 사항이 없을 때  |
-| .gitignore | 🙈 | : see_no_evil : | .gitignore 추가/수정 |
+| 타입 | Emoji | 설명 |
+| --- | --- | --- |
+| feat | ✨ | 새로운 기능 추가 |
+| fix | 🐛 | 버그 수정 |
+| docs | 📝 | 문서 수정 |
+| refactor | ♻️ |  코드 리팩터링 |
+| style | 🎨 | 코드 구조 변경, 향상 |
+| chore | 📦 | 빌드 업무 수정, 패키지 매니저 수정 |
+| design | 💄 | CSS 등 사용자 UI 디자인 변경 / 이미지 파일 업로드 |
+| comment | 💡 | 필요한 주석 추가 및 변경 |
+| rename, move | 🚚 | 파일 혹은 폴더명을 수정하거나 옮기는 작업만인 경우 |
+| remove | 🔥 | 파일을 삭제하는 작업만 수행한 경우 |
